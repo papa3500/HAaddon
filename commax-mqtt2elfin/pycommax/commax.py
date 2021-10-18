@@ -2,7 +2,7 @@ import paho.mqtt.client as mqtt
 import json
 import time
 import asyncio
-from selenium import webdriver
+#from selenium import webdriver
 
 share_dir = '/share'
 config_dir = '/data'
@@ -457,33 +457,34 @@ def do_work(config, device_list):
     async def send_to_elfin():
         while True:
             try:
-                if time.time_ns() - COLLECTDATA['LastRecv'] > 10000000000:  # 10s
-                    log('[WARNING] 10초간 신호를 받지 못했습니다. ew11 기기를 재시작합니다.')
-                    try:
-                        elfin_id = config['elfin_id']
-                        elfin_password = config['elfin_password']
-                        elfin_server = config['elfin_server']
+#                if time.time_ns() - COLLECTDATA['LastRecv'] > 10000000000:  # 10s
+#                    log('[WARNING] 10초간 신호를 받지 못했습니다. ew11 기기를 재시작합니다.')
+#                    try:
+#                        elfin_id = config['elfin_id']
+#                        elfin_password = config['elfin_password']
+#                        elfin_server = config['elfin_server']
 
-                        url = 'http://{}:{}@{}/others.html'.format(elfin_id, elfin_password, elfin_server)
+#                        url = 'http://{}:{}@{}/others.html'.format(elfin_id, elfin_password, elfin_server)
 
-                        options = webdriver.ChromeOptions()
-                        options.add_argument('--no-sandbox')
-                        options.add_argument('--headless')
-                        options.add_argument('--disable-gpu')
-                        driver = webdriver.Chrome(options=options)
-                        driver.get(url=url)
-                        button = driver.find_element_by_xpath('//*[@id="restart"]')
-                        button.click()
+#                        options = webdriver.ChromeOptions()
+#                        options.add_argument('--no-sandbox')
+#                        options.add_argument('--headless')
+#                        options.add_argument('--disable-gpu')
+#                        driver = webdriver.Chrome(options=options)
+#                        driver.get(url=url)
+#                        button = driver.find_element_by_xpath('//*[@id="restart"]')
+#                        button.click()
 
-                        alert = driver.switch_to.alert
-                        print(alert.text)
-                        alert.accept()
+#                        alert = driver.switch_to.alert
+#                        print(alert.text)
+#                        alert.accept()
 
-                        await asyncio.sleep(10)
-                    except:
-                        log('[WARNING] 기기 재시작 오류! 기기 상태를 확인하세요.')
-                    COLLECTDATA['LastRecv'] = time.time_ns()
-                elif time.time_ns() - COLLECTDATA['LastRecv'] > 100000000:
+#                        await asyncio.sleep(10)
+#                    except:
+#                        log('[WARNING] 기기 재시작 오류! 기기 상태를 확인하세요.')
+#                    COLLECTDATA['LastRecv'] = time.time_ns()
+#                elif time.time_ns() - COLLECTDATA['LastRecv'] > 100000000:
+                if time.time_ns() - COLLECTDATA['LastRecv'] > 100000000:
                     if QUEUE:
                         send_data = QUEUE.pop(0)
                         if elfin_log:
