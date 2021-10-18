@@ -13,7 +13,7 @@ RUN apk update && apk add chromium chromium-chromedriver
 # upgrade pip
 RUN pip install --upgrade pip
 # Install requirements for add-on
-RUN pip install paho-mqtt selenium
+#RUN pip install paho-mqtt selenium
 
 # Copy data for add-on
 COPY run.sh /
