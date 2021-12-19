@@ -254,6 +254,7 @@ def do_work(config, device_list):
                         else:
                             if debug:
                                 log('[DEBUG] There is no command for {}'.format('/'.join(topics)))
+                                log('[DEBUG] dadada '+sendcmd)
             else:
                 if debug:
                     log('[DEBUG] There is no command about {}'.format('/'.join(topics)))
